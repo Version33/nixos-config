@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
 	# Home Manager needs a bit of information about you and the paths it should
@@ -25,19 +25,16 @@
 		proton-pass
 		kdePackages.filelight
 		qimgv
+		orca-slicer
 
-		# # It is sometimes useful to fine-tune packages, for example, by applying
-		# # overrides. You can do that directly here, just don't forget the
-		# # parentheses. Maybe you want to install Nerd Fonts with a limited number of
-		# # fonts?
-		# (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
+		# Affinity Suite apps and their update commands.
 
-		# # You can also create simple shell scripts directly inside your
-		# # configuration. For example, this adds a command 'my-hello' to your
-		# # environment:
-		# (pkgs.writeShellScriptBin "my-hello" ''
-		#   echo "Hello, ${config.home.username}!"
-		# '')
+		# nix run github:mrshmllow/affinity-nix#updatePhoto
+		inputs.affinity-nix.packages.${pkgs.system}.photo
+		# nix run github:mrshmllow/affinity-nix#updateDesigner
+		inputs.affinity-nix.packages.${pkgs.system}.publisher
+		# nix run github:mrshmllow/affinity-nix#updatePublisher
+		inputs.affinity-nix.packages.${pkgs.system}.designer
 	];
 
 	home.shell.enableNushellIntegration = true;
