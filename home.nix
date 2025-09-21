@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, ... }:
 
 {
 	# Home Manager needs a bit of information about you and the paths it should
@@ -26,15 +26,6 @@
 		kdePackages.filelight
 		qimgv
 		orca-slicer
-
-		# Affinity Suite apps and their update commands.
-
-		# nix run github:mrshmllow/affinity-nix#updatePhoto
-		inputs.affinity-nix.packages.${pkgs.system}.photo
-		# nix run github:mrshmllow/affinity-nix#updateDesigner
-		inputs.affinity-nix.packages.${pkgs.system}.publisher
-		# nix run github:mrshmllow/affinity-nix#updatePublisher
-		inputs.affinity-nix.packages.${pkgs.system}.designer
 	];
 
 	home.shell.enableNushellIntegration = true;
