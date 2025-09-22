@@ -101,12 +101,14 @@
 
 	# List packages installed in system profile. To search, run:
 	# $ nix search wget
-	environment.systemPackages = with pkgs; [
-		wget
-		neovim
-		gtop
-		usbutils
-		gparted
+	environment.systemPackages = [
+		pkgs.wget
+		pkgs.neovim
+		pkgs.gtop
+		pkgs.usbutils
+		pkgs.gparted
+		pkgs.polkit
+		# inputs.audio.packages."x86_64-linux".default
 	];
 
 	hardware.opentabletdriver.enable = true;

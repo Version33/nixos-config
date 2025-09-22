@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
 	# Home Manager needs a bit of information about you and the paths it should
@@ -21,11 +21,11 @@
 		osu-lazer-bin
 		tidal-hifi
 		discord
-		bitwig-studio
 		proton-pass
 		kdePackages.filelight
 		qimgv
 		orca-slicer
+# 		inputs.audio.packages.x86_64-linux.default
 	];
 
 	home.shell.enableNushellIntegration = true;
