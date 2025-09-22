@@ -36,6 +36,18 @@
 		obs-studio.enable = true;
 		firefox.enable = true;
 
+		vscode = {
+			enable = true;
+			profiles.default = {
+			extensions = with pkgs.vscode-extensions; [
+				vscodevim.vim
+				visualstudioexptteam.vscodeintellicode
+				christian-kohler.path-intellisense
+					jnoortheen.nix-ide
+			];
+			};
+		};
+
 		git = {
 			enable = true;
 			userName = "Version33";

@@ -9,6 +9,7 @@
 			"discord"
 			"bitwig-studio-unwrapped"
 			"osu-lazer-bin"
-			"via"
+			"code"
+			"vscode"
 		];
 }

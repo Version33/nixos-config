@@ -82,6 +82,11 @@
 		shell = pkgs.nushell;
 	};
 
+	environment.shells = [
+		"/run/current-system/sw/bin/nu"
+		"${pkgs.zsh}/bin/nu"
+	];
+
 	# Install Programs
 	programs = {
 		steam = {
