@@ -13,24 +13,43 @@
 				config.allowUnfree = true;
 			};
 
-			# 1. Define all your VST packages here using callPackage
 			serum2 = pkgs.callPackage ./plugins/serum2.nix {};
+
+			windowsPlugins = [
+				serum2
+				# anotherVst
+			];
+
+			windowsPluginBundle = pkgs.runCommand "windows-plugin-bundle" {} ''
+				mkdir -p $out
+				${pkgs.lib.concatMapStringsSep "\n" (plugin: ''
+          			ln -s ${plugin}/* $out/
+        		'') windowsPlugins}
+      		'';
+
 
 		in
 		{
-			# 2. Expose the combined environment as the default package
-			packages.${system}.default = pkgs.buildEnv {
-				name = "vst-plugin-env";
-				paths = [
-					# List all your VSTs here
-					serum2
+			packages.${system} = {
+				inherit windowsPluginBundle;
+				inherit serum2;
 
-					# You can also include VSTs from nixpkgs directly
-					pkgs.vital
-					pkgs.surge
-					pkgs.cardinal
-				];
+				default = pkgs.buildEnv {
+					name = "vst-plugin-env";
+					paths = [
+						pkgs.bitwig-studio
+
+						pkgs.yabridge
+						pkgs.yabridgectl
+						pkgs.wineWow64Packages.stagingFull
+
+						pkgs.vital
+						pkgs.surge
+						pkgs.cardinal
+					];
+				};
 			};
-			serum2 = serum2;
+
+			
 		};
 }

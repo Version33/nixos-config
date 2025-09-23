@@ -1,5 +1,8 @@
-{ config, pkgs, inputs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
+let
+	vstBundle = inputs.audio.packages.x86_64-linux.windowsPluginBundle;
+in
 {
 	# Home Manager needs a bit of information about you and the paths it should
 	# manage.
@@ -25,7 +28,7 @@
 		kdePackages.filelight
 		qimgv
 		orca-slicer
-# 		inputs.audio.packages.x86_64-linux.default
+		inputs.audio.packages.x86_64-linux.default
 	];
 
 	home.shell.enableNushellIntegration = true;
@@ -39,12 +42,13 @@
 		vscode = {
 			enable = true;
 			profiles.default = {
-			extensions = with pkgs.vscode-extensions; [
-				vscodevim.vim
-				visualstudioexptteam.vscodeintellicode
-				christian-kohler.path-intellisense
+				extensions = with pkgs.vscode-extensions; [
+					vscodevim.vim
+					visualstudioexptteam.vscodeintellicode
+					christian-kohler.path-intellisense
 					jnoortheen.nix-ide
-			];
+					jeff-hykin.better-nix-syntax
+				];
 			};
 		};
 
@@ -77,6 +81,11 @@
 			enable = true;
 		};
 	};
+
+	home.activation.yabridge-sync = lib.hm.dag.entryAfter ["writeBoundary"] ''
+		$DRY_RUN_CMD ${pkgs.yabridgectl}/bin/yabridgectl add "${vstBundle}"
+		$DRY_RUN_CMD ${pkgs.yabridgectl}/bin/yabridgectl sync
+	'';
 
 	# Home Manager is pretty good at managing dotfiles. The primary way to manage
 	# plain files is through 'home.file'.
