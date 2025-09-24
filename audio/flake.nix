@@ -41,7 +41,9 @@
 
 						pkgs.yabridge
 						pkgs.yabridgectl
-						pkgs.wineWow64Packages.stagingFull
+						pkgs.wine-staging
+						pkgs.winetricks
+
 
 						pkgs.vital
 						pkgs.surge

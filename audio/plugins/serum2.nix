@@ -16,20 +16,16 @@ in (
 		src = serum2-installer;
 		dontUnpack = true;
 		nativeBuildInputs = [
-			pkgs.wineWow64Packages.stagingFull
+			pkgs.wine-staging
 			pkgs.xvfb-run
-			pkgs.winetricks
 		];
 
 		installPhase = ''
 			runHook preInstall
 
-			export WINEARCH="win64"
+			# export WINEARCH="win64"
 			export WINEPREFIX="$PWD/wineprefix"
 			export XDG_CONFIG_HOME="$PWD/.config"
-
-			# xvfb-run winetricks -q gdiplus
-            # xvfb-run winetricks d2d1=disabledal
 
 			xvfb-run wine $src /S
 
