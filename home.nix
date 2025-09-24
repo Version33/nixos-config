@@ -84,6 +84,12 @@ in
 	};
 
 	home.activation.yabridge-sync = lib.hm.dag.entryAfter ["writeBoundary"] ''
+		# Remove all existing plugins first for a clean sync
+    	${pkgs.yabridgectl}/bin/yabridgectl list | while IFS= read -r line; do
+        	$DRY_RUN_CMD ${pkgs.yabridgectl}/bin/yabridgectl rm "$line"
+    	done
+
+		# Add new plugins and sync
 		$DRY_RUN_CMD ${pkgs.yabridgectl}/bin/yabridgectl add "${vstBundle}"
 		$DRY_RUN_CMD ${pkgs.yabridgectl}/bin/yabridgectl sync
 	'';
