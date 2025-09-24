@@ -48,6 +48,7 @@ in
 					christian-kohler.path-intellisense
 					jnoortheen.nix-ide
 					jeff-hykin.better-nix-syntax
+					formulahendry.code-runner
 				];
 			};
 		};
