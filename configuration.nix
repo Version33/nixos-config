@@ -57,24 +57,31 @@
 	# Enable sound with pipewire.
 	services.pulseaudio.enable = false;
 	security.rtkit.enable = true;
+	users.groups.realtime = {};
+	users.groups.audio = {};
 	services.pipewire = {
 		enable = true;
 		alsa.enable = true;
 		alsa.support32Bit = true;
 		pulse.enable = true;
 		# If you want to use JACK applications, uncomment this
-		#jack.enable = true;
+		# jack.enable = true;
 
 		# use the example session manager (no others are packaged yet so this is enabled by default,
 		# no need to redefine it in your config for now)
 		#media-session.enable = true;
 	};
 
+	security.pam.loginLimits = [
+		{ domain = "@realtime"; type = "-"; item = "rtprio"; value = "99"; }
+		{ domain = "@realtime"; type = "-"; item = "memlock"; value = "unlimited"; }
+	];
+
 	# Define a user account. Don't forget to set a password with ‘passwd’.
 	users.users.vee = {
 		isNormalUser = true;
 		description = "Vee";
-		extraGroups = [ "networkmanager" "wheel" ];
+		extraGroups = [ "networkmanager" "wheel" "realtime" "audio" ];
 		packages = with pkgs; [
 			kdePackages.kate
 			home-manager
@@ -101,12 +108,14 @@
 
 	# List packages installed in system profile. To search, run:
 	# $ nix search wget
-	environment.systemPackages = with pkgs; [
-		wget
-		neovim
-		gtop
-		usbutils
-		gparted
+	environment.systemPackages = [
+		pkgs.wget
+		pkgs.neovim
+		pkgs.gtop
+		pkgs.usbutils
+		pkgs.gparted
+		pkgs.polkit
+		# inputs.audio.packages."x86_64-linux".default
 	];
 
 	hardware.opentabletdriver.enable = true;
