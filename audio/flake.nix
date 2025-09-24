@@ -1,3 +1,6 @@
+# -TODO-
+# DrivenByMoss install script: https://www.mossgrabers.de/Software/Bitwig/Bitwig.html
+
 {
 	description = "A flake for all my audio production software and VSTs";
 
@@ -44,14 +47,17 @@
 						pkgs.wine-staging
 						pkgs.winetricks
 
-
-						pkgs.vital
+						# pkgs.vital
 						pkgs.surge
-						pkgs.cardinal
+						# pkgs.cardinal
+						pkgs.airwindows
 					];
 				};
 			};
 
-			
+			# udev rule for Ableton Push 3 USB premission
+			services.udev.extraRules = ''
+				SUBSYSTEM=="usb",ATTR{idVendor}=="2982",ATTR{idProduct}=="1969",MODE="0660",GROUP="audio"
+			'';
 		};
 }

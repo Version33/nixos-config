@@ -58,6 +58,7 @@
 	services.pulseaudio.enable = false;
 	security.rtkit.enable = true;
 	users.groups.realtime = {};
+	users.groups.audio = {};
 	services.pipewire = {
 		enable = true;
 		alsa.enable = true;
@@ -80,7 +81,7 @@
 	users.users.vee = {
 		isNormalUser = true;
 		description = "Vee";
-		extraGroups = [ "networkmanager" "wheel" "realtime" ];
+		extraGroups = [ "networkmanager" "wheel" "realtime" "audio" ];
 		packages = with pkgs; [
 			kdePackages.kate
 			home-manager
