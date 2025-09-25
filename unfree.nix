@@ -7,7 +7,6 @@
 			"steam"
 			"steam-unwrapped"
 			"discord"
-			"bitwig-studio-unwrapped"
 			"osu-lazer-bin"
 			"code"
 			"vscode"

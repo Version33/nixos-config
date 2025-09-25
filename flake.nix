@@ -16,6 +16,7 @@
 			inputs.nixpkgs.follows = "nixpkgs";
 			inputs.lanzaboote.follows = "lanzaboote";
 		};
+		audio.url = "path:./audio";
 	};
 
 	outputs = { self, nixpkgs, ... }@inputs:
