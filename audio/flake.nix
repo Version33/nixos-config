@@ -54,10 +54,5 @@
 					];
 				};
 			};
-
-			# udev rule for Ableton Push 3 USB premission
-			services.udev.extraRules = ''
-				SUBSYSTEM=="usb",ATTR{idVendor}=="2982",ATTR{idProduct}=="1969",MODE="0660",GROUP="audio"
-			'';
 		};
 }

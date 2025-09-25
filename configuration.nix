@@ -57,8 +57,16 @@
 	# Enable sound with pipewire.
 	services.pulseaudio.enable = false;
 	security.rtkit.enable = true;
+
 	users.groups.realtime = {};
 	users.groups.audio = {};
+
+
+	# udev rule for Ableton Push 3 USB premission
+	services.udev.extraRules = ''
+		SUBSYSTEM=="usb", ENV{ID_VENDOR_ID}=="2982", ENV{ID_MODEL_ID}=="1969", MODE="0660", GROUP="audio"
+	'';
+
 	services.pipewire = {
 		enable = true;
 		alsa.enable = true;
@@ -108,14 +116,15 @@
 
 	# List packages installed in system profile. To search, run:
 	# $ nix search wget
-	environment.systemPackages = [
-		pkgs.wget
-		pkgs.neovim
-		pkgs.gtop
-		pkgs.usbutils
-		pkgs.gparted
-		pkgs.polkit
-		# inputs.audio.packages."x86_64-linux".default
+	environment.systemPackages = with pkgs; [
+		wget
+		neovim
+		gtop
+		usbutils
+		gparted
+		polkit
+		nixfmt-rfc-style
+		dmidecode
 	];
 
 	hardware.opentabletdriver.enable = true;
