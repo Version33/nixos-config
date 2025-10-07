@@ -4,6 +4,11 @@ let
 	vstBundle = inputs.audio.packages.x86_64-linux.windowsPluginBundle;
 in
 {
+	# Import Hyprland dotfiles module
+	imports = [
+		inputs.dots-hyprland.homeManagerModules.default
+	];
+
 	# Home Manager needs a bit of information about you and the paths it should
 	# manage.
 	home.username = "vee";
@@ -17,6 +22,27 @@ in
 	# want to update the value, then make sure to first check the Home Manager
 	# release notes.
 	home.stateVersion = "24.11"; # Please read the comment before changing.
+
+	# Configure Hyprland dotfiles
+	illogical-impulse = {
+		enable = true;
+		
+		# Configure monitors (adjust these to match your setup)
+		hyprland = {
+			monitors = [
+				",preferred,auto,1"  # Default monitor configuration
+			];
+			workspaces = [
+				"1, monitor:auto, default:true"
+			];
+		};
+
+		# Keep KDE integration disabled since we're using Hyprland
+		kde.enable = false;
+		
+		# Optional: Disable backlight if not on a laptop
+		backlight.enable = false;
+	};
 
 	# The home.packages option allows you to install Nix packages into your
 	# environment.

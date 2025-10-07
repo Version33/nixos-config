@@ -17,6 +17,11 @@
 			inputs.lanzaboote.follows = "lanzaboote";
 		};
 		audio.url = "path:./audio";
+		dots-hyprland = {
+			url = "github:Version33/dots-hyprland?dir=dist-nix";
+			inputs.nixpkgs.follows = "nixpkgs";
+			inputs.home-manager.follows = "home-manager";
+		};
 	};
 
 	outputs = { self, nixpkgs, ... }@inputs:
