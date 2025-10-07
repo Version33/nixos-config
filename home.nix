@@ -4,6 +4,10 @@ let
 	vstBundle = inputs.audio.packages.x86_64-linux.windowsPluginBundle;
 in
 {
+	imports = [
+		inputs.dots-hyprland.homeManagerModules.default
+	];
+
 	# Home Manager needs a bit of information about you and the paths it should
 	# manage.
 	home.username = "vee";
@@ -33,6 +37,20 @@ in
 
 	home.shell.enableNushellIntegration = true;
 	programs.starship.enableNushellIntegration = true;
+
+	# End-4 dots-hyprland configuration (disabled by default)
+	# Enable with: programs.dots-hyprland.enable = true;
+	programs.dots-hyprland = {
+		enable = false; # Set to true to enable the Hyprland setup
+		# Default configuration when enabled:
+		# hyprland.enable = true;
+		# ags.enable = true;
+		# notifications.enable = true;
+		# launcher.enable = true;
+		# screenLock.enable = true;
+		# wallpaper.enable = true;
+		# utilities.enable = true;
+	};
 
 	programs = {
 		fastfetch.enable = true;

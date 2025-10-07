@@ -17,6 +17,10 @@
 			inputs.lanzaboote.follows = "lanzaboote";
 		};
 		audio.url = "path:./audio";
+		dots-hyprland = {
+			url = "path:./dots-hyprland";
+			inputs.nixpkgs.follows = "nixpkgs";
+		};
 	};
 
 	outputs = { self, nixpkgs, ... }@inputs:
